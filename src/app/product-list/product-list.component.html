@@ -1,0 +1,32 @@
+<h2>Products</h2>
+
+<!-- Add *ngFor structural directive on a <div> -->
+<!-- With *ngFor, the <div> repeats for each product in the list.
+Structural directives shape or reshape the DOM's structure, by adding, removing, and manipulating elements-->
+<div *ngFor="let product of products">
+  <!-- Inside the <div>, add an <h3> and {{ product.name }}. The {{ product.name }} statement is an example of Angular's interpolation syntax. Interpolation {{ }} lets you render the property value as text.-->
+  <h3>
+    <!-- To make each product name a link to product details, add the <a> element around {{ product.name }}. -->
+    <!-- Set the title to be the product's name by using the property binding [ ] syntax, as follows-->
+    <a [title]="product.name + ' details'">{{ product.name }}</a>
+  </h3>
+
+  <!-- Add the product descriptions. On a <p> element, use an *ngIf directive so that Angular only creates the <p> element if the current product has a description. -->
+  <p *ngIf="product.description">Description: {{ product.description }}</p>
+
+  <!-- Add a button so users can share a product. Bind the button's click event to the share() method in product-list.component.ts. Event binding uses a set of parentheses, ( ), around the event, as in the (click) event on the <button> element -->
+  <button (click)="share()">Share</button>
+
+  <!-- Finally, to display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component using property binding. -->
+  <!-- Update the ProductListComponent to receive data from the ProductAlertsComponent.
+
+In product-list.component.html, bind <app-product-alerts> to the onNotify() method of the product list component. <app-product-alerts> is what displays the Notify Me button. -->
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
